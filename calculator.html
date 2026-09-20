@@ -5,13 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Калькулятор растаможки — JapZabCar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/favicon.png" type="image/png">
 <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 <body>
 <header class="site">
   <div class="container">
-    <div class="logo">Jap<span>Zab</span>Car</div>
+    <a href="index.html" class="logo"><img src="assets/logo.png" alt="JapZabCar"></a>
     <nav class="main">
       <a href="index.html" >Главная</a>
       <a href="portfolio.html" >Доставленные авто</a>
@@ -25,13 +26,6 @@
 <section class="container">
 <style>
   :root {
-    --bg: #f5f6f8;
-    --surface: #ffffff;
-    --border: #e2e5eb;
-    --text: #1b2430;
-    --muted: #64748b;
-    --accent: #2a5db0;
-    --accent-text: #ffffff;
     --warn-bg: #fff6e5;
     --warn-border: #f0d896;
     --warn-text: #8a5a00;
@@ -40,26 +34,12 @@
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #12161c;
-      --surface: #1b212b;
-      --border: #2b3441;
-      --text: #e7ecf3;
-      --muted: #93a1b4;
-      --accent: #6fa0e8;
-      --accent-text: #0d1520;
       --warn-bg: #2e2410;
       --warn-border: #5a4415;
       --warn-text: #f0c36b;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #12161c;
-    --surface: #1b212b;
-    --border: #2b3441;
-    --text: #e7ecf3;
-    --muted: #93a1b4;
-    --accent: #6fa0e8;
-    --accent-text: #0d1520;
     --warn-bg: #2e2410;
     --warn-border: #5a4415;
     --warn-text: #f0c36b;
@@ -256,6 +236,11 @@ async function loadCbrRate() {
   }
 }
 loadCbrRate();
+// Подстраховка: если самый первый fetch на странице проиграл гонку с установкой соединения
+// (наблюдалось в тестах — первый вызов не всегда успевает) — пробуем ещё раз после полной загрузки.
+window.addEventListener('load', () => {
+  if (!document.getElementById('rate').value) loadCbrRate();
+});
 
 function calculate() {
   const age = document.getElementById('age').value;
