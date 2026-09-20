@@ -82,6 +82,32 @@ nav.main a.active { color: #7fb0f0; opacity: 1; }
   margin: 0 0 28px;
 }
 .hero-flags { font-size: 22px; margin-bottom: 8px; }
+
+/* Hero load-in (plays once on page load, not scroll-triggered) */
+.hero-flags, .hero h1, .hero p, .hero .cta-row {
+  animation: heroIn 0.6s ease both;
+}
+.hero-flags { animation-delay: 0s; }
+.hero h1 { animation-delay: 0.08s; }
+.hero p { animation-delay: 0.16s; }
+.hero .cta-row { animation-delay: 0.24s; }
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll-reveal (see assets/js/reveal.js) */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-flags, .hero h1, .hero p, .hero .cta-row { animation: none; }
+  .reveal { transition: none; opacity: 1; transform: none; }
+}
 .btn {
   display: inline-block;
   padding: 12px 22px;
@@ -137,6 +163,11 @@ section { padding: 48px 0; }
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -12px rgba(20, 32, 58, 0.25);
 }
 .card img {
   width: 100%;
