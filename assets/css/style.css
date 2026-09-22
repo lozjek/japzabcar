@@ -110,7 +110,15 @@ nav.main a.active { opacity: 1; }
   max-width: 560px;
   margin: 0 0 28px;
 }
-.hero-flags { font-size: 22px; margin-bottom: 8px; }
+.hero-flags { display: flex; gap: 8px; margin-bottom: 12px; }
+.flag-icon {
+  display: inline-flex;
+  width: 27px; height: 18px;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+.flag-icon svg { width: 100%; height: 100%; display: block; }
 
 /* Hero load-in (plays once on page load, not scroll-triggered) */
 .hero-flags, .hero h1, .hero p, .hero .cta-row {
