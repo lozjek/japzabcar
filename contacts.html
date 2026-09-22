@@ -27,27 +27,29 @@
   <h2 class="section-title">Контакты</h2>
   <p class="section-subtitle">Оставьте заявку — ответим в Telegram или WhatsApp, обычно в течение дня</p>
 
-  <div class="contact-box">
-    <form id="leadForm" onsubmit="return sendLead(event)">
-      <label for="name">Имя</label>
-      <input type="text" id="name" required>
+  <div class="panel">
+    <div class="contact-box">
+      <form id="leadForm" onsubmit="return sendLead(event)">
+        <label for="name">Имя</label>
+        <input type="text" id="name" required>
 
-      <label for="phone">Телефон / Telegram</label>
-      <input type="text" id="phone" required>
+        <label for="phone">Телефон / Telegram</label>
+        <input type="text" id="phone" required>
 
-      <label for="message">Что ищете</label>
-      <textarea id="message" rows="4" placeholder="Например: Toyota Vezel, до 1.5 млн, для себя"></textarea>
+        <label for="message">Что ищете</label>
+        <textarea id="message" rows="4" placeholder="Например: Toyota Vezel, до 1.5 млн, для себя"></textarea>
 
-      <button class="btn btn-primary" type="submit" style="margin-top:18px;width:100%;">Отправить заявку</button>
-      <div class="contact-status" id="leadStatus"></div>
-    </form>
+        <button class="btn btn-primary" type="submit" style="margin-top:18px;width:100%;">Отправить заявку</button>
+        <div class="contact-status" id="leadStatus"></div>
+      </form>
+    </div>
+
+    <p style="margin-top:28px;">Или сразу пишите/звоните:</p>
+    <p>
+      <a class="btn btn-primary" href="https://wa.me/79963133996">WhatsApp</a>
+      <a class="btn btn-ghost" style="color:var(--accent);border-color:var(--border);" href="https://t.me/JapZabCar">Telegram-канал</a>
+    </p>
   </div>
-
-  <p style="margin-top:28px;">Или сразу пишите/звоните:</p>
-  <p>
-    <a class="btn btn-primary" href="https://wa.me/79963133996">WhatsApp</a>
-    <a class="btn btn-ghost" style="color:var(--accent);border-color:var(--border);" href="https://t.me/JapZabCar">Telegram-канал</a>
-  </p>
 </section>
 
 <script>
