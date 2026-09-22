@@ -106,12 +106,6 @@ nav.main a.active { color: #ef5b71; opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .hero-flags, .hero h1, .hero p, .hero .cta-row { animation: none; }
   .reveal { transition: none; opacity: 1; transform: none; }
-  .carousel-slide.active,
-  .lightbox-img,
-  .lightbox:not([hidden]),
-  .lightbox.closing { animation: none !important; }
-  .slide-photo img { transition: none; }
-  .slide-photo:hover img { transform: none; }
 }
 .btn {
   display: inline-block;
@@ -354,7 +348,27 @@ footer.site a { color: #cddcf3; }
   display: flex; align-items: center; justify-content: center;
 }
 .lightbox[hidden] { display: none; }
+.lightbox:not([hidden]) { animation: lightboxBackdropIn 0.2s ease; }
+.lightbox.closing { animation: lightboxBackdropOut 0.18s ease forwards; }
+@keyframes lightboxBackdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes lightboxBackdropOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
 .lightbox-img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 8px; }
+.lightbox-img.pop { animation: lightboxImgPop 0.28s ease; }
+.lightbox.closing .lightbox-img { animation: lightboxImgOut 0.18s ease forwards; }
+@keyframes lightboxImgPop {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes lightboxImgOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.96); }
+}
 .lightbox-close {
   position: absolute; top: 18px; right: 22px;
   background: none; border: none; color: #fff;
