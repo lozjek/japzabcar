@@ -18,13 +18,18 @@
     dot.type = 'button';
     dot.className = 'carousel-dot';
     dot.setAttribute('aria-label', 'Автомобиль ' + (i + 1) + ' из ' + total);
-    dot.addEventListener('click', function () { goTo(i); });
+    dot.addEventListener('click', function () { goTo(i, i > current ? 'next' : 'prev'); });
     dotsWrap.appendChild(dot);
     return dot;
   });
 
-  function render() {
-    slides.forEach(function (slide, i) { slide.classList.toggle('active', i === current); });
+  function render(dir) {
+    slides.forEach(function (slide, i) {
+      var isActive = i === current;
+      slide.classList.remove('dir-next', 'dir-prev');
+      if (isActive && dir) slide.classList.add(dir === 'next' ? 'dir-next' : 'dir-prev');
+      slide.classList.toggle('active', isActive);
+    });
     dots.forEach(function (dot, i) { dot.classList.toggle('active', i === current); });
     counterEl.textContent = (current + 1) + ' / ' + total;
     var activeDot = dots[current];
@@ -33,13 +38,13 @@
     }
   }
 
-  function goTo(i) {
+  function goTo(i, dir) {
     current = (i + total) % total;
-    render();
+    render(dir);
   }
 
-  function next() { goTo(current + 1); }
-  function prev() { goTo(current - 1); }
+  function next() { goTo(current + 1, 'next'); }
+  function prev() { goTo(current - 1, 'prev'); }
 
   prevBtn.addEventListener('click', prev);
   nextBtn.addEventListener('click', next);
@@ -74,6 +79,7 @@
 
   var lbGallery = [];
   var lbIndex = 0;
+  var closeTimer = null;
 
   function renderLightbox() {
     lightboxImg.src = lbGallery[lbIndex];
@@ -83,20 +89,31 @@
     lightboxNext.style.display = multi ? '' : 'none';
     lightboxCounter.style.display = multi ? '' : 'none';
     lightboxCounter.textContent = (lbIndex + 1) + ' / ' + lbGallery.length;
+    // restart the fade/scale-in animation on the (reused) img element
+    lightboxImg.classList.remove('pop');
+    void lightboxImg.offsetWidth;
+    lightboxImg.classList.add('pop');
   }
 
   function openLightbox(gallery, startIndex) {
     if (!gallery || !gallery.length) return;
+    clearTimeout(closeTimer);
     lbGallery = gallery;
     lbIndex = startIndex || 0;
-    renderLightbox();
     lightbox.hidden = false;
+    lightbox.classList.remove('closing');
+    renderLightbox();
     document.body.style.overflow = 'hidden';
   }
 
   function closeLightbox() {
-    lightbox.hidden = true;
-    document.body.style.overflow = '';
+    if (lightbox.hidden) return;
+    lightbox.classList.add('closing');
+    closeTimer = setTimeout(function () {
+      lightbox.hidden = true;
+      lightbox.classList.remove('closing');
+      document.body.style.overflow = '';
+    }, 180);
   }
 
   function lbNext() { lbIndex = (lbIndex + 1) % lbGallery.length; renderLightbox(); }
