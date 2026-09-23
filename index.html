@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JapZabCar — авто из Японии, Кореи, Китая под ключ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -24,7 +25,10 @@
 
 
 <div class="hero">
-  <div class="hero-bg-photo"><img src="assets/photos/hero/mercedes-amg-c63.jpg" alt="" loading="eager"></div>
+  <div class="hero-bg-photo">
+    <img class="bg-blur" src="assets/photos/hero/mercedes-amg-c63.jpg" alt="" loading="eager" aria-hidden="true">
+    <img class="bg-sharp" src="assets/photos/hero/mercedes-amg-c63.jpg" alt="" loading="eager">
+  </div>
   <div class="container">
     <div class="hero-flags">
       <span class="flag-icon"><svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Япония"><rect width="30" height="20" fill="#fff"/><circle cx="15" cy="10" r="6" fill="#bc002d"/></svg></span>
