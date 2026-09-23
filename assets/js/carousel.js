@@ -33,7 +33,7 @@
     dots.forEach(function (dot, i) { dot.classList.toggle('active', i === current); });
     counterEl.textContent = (current + 1) + ' / ' + total;
     var activeDot = dots[current];
-    if (activeDot && activeDot.scrollIntoView) {
+    if (dir && activeDot && activeDot.scrollIntoView) {
       activeDot.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }
   }
