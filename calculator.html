@@ -5,307 +5,69 @@
 <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Калькулятор растаможки — JapZabCar</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="icon" href="assets/favicon.png" type="image/png">
 <link rel="stylesheet" href="assets/css/style.css">
-
 </head>
 <body>
 <header class="site">
   <div class="container">
     <a href="index.html" class="logo"><img src="assets/logo.png" alt="JapZabCar"></a>
-    <nav class="main">
-      <a href="index.html" >Главная</a>
-      <a href="portfolio.html" >Доставленные авто</a>
-      <a href="calculator.html" class="active">Калькулятор</a>
-      <a href="contacts.html" >Контакты</a>
-    </nav>
+    <nav class="main"><a href="index.html">Главная</a><a href="portfolio.html">Доставленные авто</a><a href="calculator.html" class="active">Калькулятор</a><a href="contacts.html">Контакты</a></nav>
+    <a href="contacts.html" class="header-cta">Оставить заявку <span>&#8594;</span></a>
   </div>
 </header>
 
-
-<section class="container">
-<style>
-  :root {
-    --warn-bg: #fff6e5;
-    --warn-border: #f0d896;
-    --warn-text: #8a5a00;
-    --mono: "IBM Plex Mono", ui-monospace, monospace;
-    --sans: "Manrope", system-ui, sans-serif;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --warn-bg: #2e2410;
-      --warn-border: #5a4415;
-      --warn-text: #f0c36b;
-    }
-  }
-  :root[data-theme="dark"] {
-    --warn-bg: #2e2410;
-    --warn-border: #5a4415;
-    --warn-text: #f0c36b;
-  }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    padding: 32px 16px 48px;
-  }
-  .calc-wrap { max-width: 480px; margin: 0 auto; }
-  h1 { font-size: 21px; font-weight: 800; letter-spacing: -0.01em; margin: 0 0 4px; }
-  .subtitle { color: var(--muted); font-size: 13px; margin: 0 0 20px; }
-  .calc-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-  }
-  label { display: block; margin-top: 14px; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
-  label:first-of-type { margin-top: 0; }
-  select, input {
-    width: 100%; padding: 10px 12px; margin-top: 6px; font-size: 15px;
-    box-sizing: border-box; background: var(--bg); color: var(--text);
-    border: 1px solid var(--border); border-radius: 8px; font-family: var(--sans);
-  }
-  select:focus, input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
-  button {
-    width: 100%; margin-top: 20px; padding: 12px 20px; font-size: 15px; font-weight: 700;
-    cursor: pointer; background: var(--accent); color: var(--accent-text); border: none; border-radius: 8px;
-  }
-  button:hover { filter: brightness(1.05); }
-  #rateStatus { font-size: 12px; color: var(--muted); margin-top: 6px; }
-  #result {
-    margin-top: 20px; padding: 16px; background: var(--bg);
-    border: 1px solid var(--border); border-radius: 10px; display: none;
-  }
-  #result.warn { background: var(--warn-bg); border-color: var(--warn-border); }
-  .calc-row { display: flex; justify-content: space-between; gap: 12px; margin: 6px 0; font-size: 14px; }
-  .calc-row span:last-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-  .calc-total { font-weight: 800; font-size: 17px; border-top: 1px solid var(--border); margin-top: 10px; padding-top: 10px; }
-  .calc-disclaimer { font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.5; }
-  #result.warn .calc-disclaimer:first-of-type { color: var(--warn-text); }
-</style>
-<div class="panel">
-
-
-<div class="calc-wrap">
-  <h1>Калькулятор растаможки авто</h1>
-  <p class="subtitle">Предварительный расчёт для физлица — пошлина, утильсбор, таможенный сбор</p>
-
-  <div class="calc-card">
-    <label for="age">Возраст автомобиля</label>
-    <select id="age">
-      <option value="new">До 3 лет</option>
-      <option value="mid">3–5 лет</option>
-      <option value="old">Старше 5 лет</option>
-    </select>
-
-    <label for="volume">Объём двигателя, см³</label>
-    <input type="number" id="volume" placeholder="например, 1998">
-
-    <label for="power">Мощность двигателя, л.с.</label>
-    <input type="number" id="power" placeholder="например, 150">
-
-    <label for="valueEur">Стоимость авто, € (оценочная таможенная стоимость)</label>
-    <input type="number" id="valueEur" placeholder="например, 15000">
-
-    <label for="rate">Курс ЦБ РФ, ₽ за 1 €</label>
-    <input type="number" id="rate" placeholder="загружаем...">
-    <div id="rateStatus">Загружаем курс...</div>
-
-    <button onclick="calculate()">Рассчитать</button>
-
-    <div id="result"></div>
+<div class="container">
+  <div class="page-head">
+    <div class="page-kicker" data-hero="">Для физлица</div>
+    <div class="page-head-row" data-hero="">
+      <h1>Калькулятор растаможки</h1>
+      <p class="page-head-desc">Предварительный расчёт: пошлина, утильсбор и таможенный сбор. Результат обновляется сразу.</p>
+    </div>
+  </div>
+  <div class="calc-grid" data-hero="">
+    <div class="calc-form">
+      <div class="calc-field">
+        <div class="calc-field-label">Возраст автомобиля</div>
+        <div class="calc-seg" id="calcAgeSeg">
+          <button type="button" data-age="new" class="active">До 3 лет</button>
+          <button type="button" data-age="mid">3&ndash;5 лет</button>
+          <button type="button" data-age="old">Старше 5 лет</button>
+        </div>
+      </div>
+      <label class="calc-field"><span class="calc-field-label">Объём двигателя, см&sup3;</span><input type="number" inputmode="decimal" id="calcVolume" placeholder="например, 1998"></label>
+      <label class="calc-field"><span class="calc-field-label">Мощность, л.с.</span><input type="number" inputmode="decimal" id="calcPower" placeholder="например, 150"></label>
+      <label class="calc-field"><span class="calc-field-label">Стоимость авто, &euro;</span><input type="number" inputmode="decimal" id="calcValueEur" placeholder="например, 15000"><span class="calc-field-hint">Оценочная таможенная стоимость</span></label>
+      <label class="calc-field"><span class="calc-field-label">Курс ЦБ РФ, &#8381; за 1 &euro;</span><input type="number" inputmode="decimal" id="calcRate" placeholder="загружаем&hellip;"><span class="calc-field-hint" id="calcRateStatus">Загружаем курс ЦБ РФ&hellip;</span></label>
+    </div>
+    <div class="calc-result">
+      <div class="calc-result-label">Расчёт</div>
+      <div id="calcReady" hidden>
+        <div class="calc-rows">
+          <div class="calc-row"><span>Пошлина</span><span id="calcDutyVal"></span></div>
+          <div class="calc-row"><span>Утилизационный сбор</span><span id="calcUtilVal"></span></div>
+          <div class="calc-row"><span>Таможенный сбор за операции</span><span id="calcFeeVal"></span></div>
+        </div>
+        <div class="calc-total"><span class="calc-total-label">Итого растаможка</span><span class="calc-total-value" id="calcTotalVal"></span></div>
+        <div class="calc-warn" id="calcWarn" hidden><b>Авто от 160 л.с.:</b> утильсбор посчитан по таблице повышенных коэффициентов с индексацией 2026 года. Перед оплатой уточните у менеджера.</div>
+      </div>
+      <div class="calc-empty" id="calcEmpty"></div>
+      <p class="calc-disclaimer">Предварительный расчёт. Не включает доставку, брокерские услуги, СБКТС/ЭПТС и прочие сопутствующие расходы. Точную сумму подтверждает менеджер.</p>
+      <a href="contacts.html" class="btn btn-primary">Получить точный расчёт под ключ <span>&#8594;</span></a>
+    </div>
   </div>
 </div>
-
-<script>
-// Источники и статус подтверждения — см. calculator-formuly.md в этом же комплекте.
-// Пошлина физлиц: Решение Совета ЕЭК №107 от 20.12.2017, Прил.2 Табл.2 — прочитан официальный PDF напрямую.
-
-const DUTY_TABLE = {
-  // Для age="new" (младше 3 лет) строка выбирается по ТАМОЖЕННОЙ СТОИМОСТИ В ЕВРО (max — порог стоимости €),
-  // а не по объёму двигателя — так буквально в тексте Решения Совета ЕЭК №107, Прил.2, Табл.2, п.3
-  // (подтверждено первоисточником: https://eec.eaeunion.org/upload/medialibrary/48d/754bnati3u804penijmb0h866e5g6cng/Prilozhenie-2_107.pdf).
-  // Объём двигателя входит только в формулу минимума (perCm3 × объём).
-  new: [
-    { max: 8500, pct: 0.54, perCm3: 2.5 },
-    { max: 16700, pct: 0.48, perCm3: 3.5 },
-    { max: 42300, pct: 0.48, perCm3: 5.5 },
-    { max: 84500, pct: 0.48, perCm3: 7.5 },
-    { max: 169000, pct: 0.48, perCm3: 15.0 },
-    { max: Infinity, pct: 0.48, perCm3: 20.0 },
-  ],
-  mid: [
-    { max: 1000, perCm3: 1.5 },
-    { max: 1500, perCm3: 1.7 },
-    { max: 1800, perCm3: 2.5 },
-    { max: 2300, perCm3: 2.7 },
-    { max: 3000, perCm3: 3.0 },
-    { max: Infinity, perCm3: 3.6 },
-  ],
-  old: [
-    { max: 1000, perCm3: 3.0 },
-    { max: 1500, perCm3: 3.2 },
-    { max: 1800, perCm3: 3.5 },
-    { max: 2300, perCm3: 4.8 },
-    { max: 3000, perCm3: 5.0 },
-    { max: Infinity, perCm3: 5.7 },
-  ],
-};
-
-const UTIL_FEE_BASE = 20000;
-const UTIL_COEF = { new: 0.17, mid: 0.26, old: 0.26 };
-const POWER_LIMIT_HP = 160;
-
-// Утильсбор для мощности >=160 л.с. — Пост. №1291 в ред. №1713 от 01.11.2025.
-// Сверено с живым калькулятором drom.ru через агент-браузер 2026-09-20 (реальные значения, не пересказ).
-// Коэффициенты ниже = таблица alta.ru/Контур.Норматив × 1.2 (индексация 2026 года, подтверждена на
-// всех 5 диапазонах объёма и обеих возрастных колонках). Круглое число-порог относится к следующему
-// диапазону (строгое "<"), не к предыдущему — проверено на переходах 159→160 и 219→220.
-const UTIL_HP_BRACKETS = [190, 220, 250, 280, 310, 340, 370, 400, 430, 460, 500, Infinity];
-const UTIL_INDEXATION_2026 = 1.2;
-const UTIL_HIGH_POWER_TABLE = {
-  1000: [[12.8,23.7],[13.2,24.4],[13.5,25.1],[14.4,25.1],[14.4,25.1],[14.4,25.1],[14.4,25.1],[14.4,25.1],[14.4,25.1],[14.4,25.1],[14.4,25.1],[14.4,25.1]],
-  2000: [[37.5,62.2],[39.7,66],[42.1,69.9],[47.6,76.6],[53.8,83.8],[60.8,91.8],[69.3,100.5],[79,110],[90,120.5],[102.7,132],[117,144.5],[133.4,158.2]],
-  3000: [[96.11,144],[98.5,145.9],[100.1,148],[105,152.5],[109.2,157.1],[113.6,161.4],[118.1,165.9],[122.9,170.6],[127.8,175.4],[132.9,180.3],[138.2,185.3],[143.7,190.5]],
-  3500: [[109.8,166.7],[112,168.5],[114.3,170.3],[117.1,172.7],[120,177],[126.6,181.5],[133.6,186.9],[141,192.5],[148.7,198.3],[156.9,204.2],[165.5,210.4],[174.6,216.7]],
-  Infinity: [[139.4,182.9],[141.8,185.7],[144.2,188.5],[147.1,192.8],[150,197.2],[155.3,208],[160.73,219.5],[166.4,231.6],[172.2,244.3],[178.2,257.8],[184.4,272],[190.9,286.9]],
-};
-
-function getVolumeCategoryKey(volume) {
-  if (volume <= 1000) return 1000;
-  if (volume <= 2000) return 2000;
-  if (volume <= 3000) return 3000;
-  if (volume <= 3500) return 3500;
-  return Infinity;
-}
-
-function getUtilFeeRub(age, volume, power) {
-  if (power < POWER_LIMIT_HP) {
-    return UTIL_FEE_BASE * UTIL_COEF[age];
-  }
-  const volKey = getVolumeCategoryKey(volume);
-  const rowIndex = UTIL_HP_BRACKETS.findIndex(b => power < b);
-  const row = UTIL_HIGH_POWER_TABLE[volKey][rowIndex];
-  const coef = (age === 'new' ? row[0] : row[1]) * UTIL_INDEXATION_2026; // mid и old — обе идут по колонке "старше 3 лет"
-  return UTIL_FEE_BASE * coef;
-}
-
-// Таможенный сбор за операции — Пост. №1637 от 28.11.2024, ставки на 2026 г. по Пост. №1638 от 23.10.2025.
-// Не подтверждено напрямую первоисточником, но сошлись 2 независимых таможенных портала (alta.ru, spinform.ru)
-// + арифметика индексации 2025->2026 сходится. Зависит от стоимости в РУБЛЯХ, для любого возраста авто.
-const CUSTOMS_FEE_TABLE = [
-  { max: 200000, fee: 1231 },
-  { max: 450000, fee: 2462 },
-  { max: 1200000, fee: 4924 },
-  { max: 2700000, fee: 13541 },
-  { max: 4200000, fee: 18465 },
-  { max: 5500000, fee: 21344 },
-  { max: 10000000, fee: 49240 },
-  { max: Infinity, fee: 73860 },
-];
-
-function findCustomsFee(valueRub) {
-  return CUSTOMS_FEE_TABLE.find(b => valueRub <= b.max).fee;
-}
-
-function findBracket(age, volume, valueEur) {
-  // "new" — строка по стоимости авто, "mid"/"old" — строка по объёму двигателя (разные подразделы Табл.2)
-  const key = age === 'new' ? valueEur : volume;
-  return DUTY_TABLE[age].find(b => key <= b.max);
-}
-
-// Автоподгрузка курса ЦБ РФ. Официальный cbr.ru не отдаёт CORS-заголовки — прямой fetch с браузера
-// падает с "Failed to fetch" (проверено 2026-09-20). Используем сторонее зеркало cbr-xml-daily.ru, которое
-// зеркалит официальные данные ЦБ РФ и отдаёт их с CORS для клиентского JS (курсы совпали с ЦБ РФ на ту же
-// дату, которые показывал drom.ru). Это НЕ официальный источник — если зеркало ляжет, поле остаётся
-// редактируемым вручную.
-async function loadCbrRate() {
-  const rateInput = document.getElementById('rate');
-  const statusEl = document.getElementById('rateStatus');
-  try {
-    const res = await fetch('https://www.cbr-xml-daily.ru/daily_json.js');
-    const data = await res.json();
-    const eurRate = data.Valute.EUR.Value;
-    const dateStr = new Date(data.Date).toLocaleDateString('ru-RU');
-    rateInput.value = eurRate.toFixed(4);
-    rateInput.placeholder = '';
-    statusEl.textContent = `Курс ЦБ РФ на ${dateStr}: ${eurRate.toFixed(2)} ₽ (зеркало cbr-xml-daily.ru, можно исправить вручную)`;
-  } catch (e) {
-    rateInput.placeholder = 'не загрузилось, введите вручную (cbr.ru)';
-    statusEl.textContent = 'Не удалось загрузить курс автоматически — введите вручную с cbr.ru.';
-  }
-}
-loadCbrRate();
-// Подстраховка: если самый первый fetch на странице проиграл гонку с установкой соединения
-// (наблюдалось в тестах — первый вызов не всегда успевает) — пробуем ещё раз после полной загрузки.
-window.addEventListener('load', () => {
-  if (!document.getElementById('rate').value) loadCbrRate();
-});
-
-function calculate() {
-  const age = document.getElementById('age').value;
-  const volume = parseFloat(document.getElementById('volume').value);
-  const power = parseFloat(document.getElementById('power').value);
-  const valueEur = parseFloat(document.getElementById('valueEur').value);
-  const rate = parseFloat(document.getElementById('rate').value);
-
-  const resultEl = document.getElementById('result');
-  resultEl.style.display = 'block';
-
-  if (!volume || !power) {
-    resultEl.className = 'warn';
-    resultEl.innerHTML = '<div class="calc-row">Заполните объём двигателя и мощность.</div>';
-    return;
-  }
-
-  if (!valueEur || !rate) {
-    resultEl.className = 'warn';
-    resultEl.innerHTML = '<div class="calc-row">Заполните стоимость авто и курс — сбор считается от стоимости при любом возрасте авто.</div>';
-    return;
-  }
-
-  const bracket = findBracket(age, volume, valueEur);
-  let dutyEur;
-  if (age === 'new') {
-    dutyEur = Math.max(valueEur * bracket.pct, bracket.perCm3 * volume);
-  } else {
-    dutyEur = bracket.perCm3 * volume;
-  }
-  const dutyRub = dutyEur * rate;
-  const utilFeeRub = getUtilFeeRub(age, volume, power);
-  const valueRub = valueEur * rate;
-  const customsFeeRub = findCustomsFee(valueRub);
-  const totalRub = dutyRub + utilFeeRub + customsFeeRub;
-
-  resultEl.className = power >= POWER_LIMIT_HP ? 'warn' : '';
-  const highPowerNote = power >= POWER_LIMIT_HP
-    ? '<div class="calc-disclaimer"><b>Авто от 160 л.с.:</b> утильсбор посчитан по таблице повышенных коэффициентов (с индексацией 2026 года), сверено с живым калькулятором drom.ru — но это тоже не первоисточник напрямую. Перед реальной оплатой уточните у менеджера.</div>'
-    : '';
-
-  resultEl.innerHTML = `
-    <div class="calc-row"><span>Пошлина</span><span>${Math.round(dutyRub).toLocaleString('ru-RU')} ₽</span></div>
-    <div class="calc-row"><span>Утилизационный сбор</span><span>${Math.round(utilFeeRub).toLocaleString('ru-RU')} ₽</span></div>
-    <div class="calc-row"><span>Таможенный сбор за операции</span><span>${Math.round(customsFeeRub).toLocaleString('ru-RU')} ₽</span></div>
-    <div class="calc-row calc-total"><span>Итого (растаможка)</span><span>${Math.round(totalRub).toLocaleString('ru-RU')} ₽</span></div>
-    ${highPowerNote}
-    <div class="calc-disclaimer">Предварительный расчёт. Не включает доставку, брокерские услуги, СБКТС/ЭПТС и прочие сопутствующие расходы. Точную сумму подтверждает менеджер. Формулы требуют сверки с первоисточником перед боевым запуском — см. calculator-formuly.md.</div>
-  `;
-}
-</script>
-
-</div>
-</section>
 
 <footer class="site">
   <div class="container">
-    <div>JapZabCar &mdash; авто из Японии, Кореи и Китая под ключ.</div>
-    <div style="margin-top:8px;">Телефон/WhatsApp: <a href="https://wa.me/79963133996">+7 996 313-39-96</a> &middot; Telegram: <a href="https://t.me/JapZabCar">@JapZabCar</a></div>
+    <span>JapZabCar &mdash; авто из Японии, Кореи и Китая под ключ</span>
+    <span class="footer-links"><a href="tel:+79963133996">+7 996 313-39-96</a><a href="https://t.me/JapZabCar">Telegram: @JapZabCar</a></span>
   </div>
 </footer>
 
-<script src="assets/js/header.js" defer></script>
-<script src="assets/js/reveal.js" defer></script>
+<script src="assets/js/anim.js" defer></script>
+<script src="assets/js/calculator.js" defer></script>
+<script>document.addEventListener("DOMContentLoaded",function(){JZAnim.hero(document);});</script>
 </body>
 </html>

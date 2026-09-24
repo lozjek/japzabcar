@@ -5,78 +5,53 @@
 <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Контакты — JapZabCar</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="icon" href="assets/favicon.png" type="image/png">
 <link rel="stylesheet" href="assets/css/style.css">
-
 </head>
 <body>
 <header class="site">
   <div class="container">
     <a href="index.html" class="logo"><img src="assets/logo.png" alt="JapZabCar"></a>
-    <nav class="main">
-      <a href="index.html" >Главная</a>
-      <a href="portfolio.html" >Доставленные авто</a>
-      <a href="calculator.html" >Калькулятор</a>
-      <a href="contacts.html" class="active">Контакты</a>
-    </nav>
+    <nav class="main"><a href="index.html">Главная</a><a href="portfolio.html">Доставленные авто</a><a href="calculator.html">Калькулятор</a><a href="contacts.html" class="active">Контакты</a></nav>
+    
   </div>
 </header>
 
-
-<section class="container">
-  <h2 class="section-title">Контакты</h2>
-  <p class="section-subtitle">Оставьте заявку — ответим в Telegram или WhatsApp, обычно в течение дня</p>
-
-  <div class="panel">
-    <div class="contact-box">
-      <form id="leadForm" onsubmit="return sendLead(event)">
-        <label for="name">Имя</label>
-        <input type="text" id="name" required>
-
-        <label for="phone">Телефон / Telegram</label>
-        <input type="text" id="phone" required>
-
-        <label for="message">Что ищете</label>
-        <textarea id="message" rows="4" placeholder="Например: Toyota Vezel, до 1.5 млн, для себя"></textarea>
-
-        <button class="btn btn-primary" type="submit" style="margin-top:18px;width:100%;">Отправить заявку</button>
-        <div class="contact-status" id="leadStatus"></div>
-      </form>
+<div class="container">
+  <div class="page-head">
+    <div class="page-kicker" data-hero="">Заявка на подбор</div>
+    <div class="page-head-row" data-hero="">
+      <h1>Контакты</h1>
+      <p class="page-head-desc">Оставьте заявку &mdash; ответим в Telegram, обычно в течение дня.</p>
     </div>
-
-    <p style="margin-top:28px;">Или сразу пишите/звоните:</p>
-    <p>
-      <a class="btn btn-primary" href="https://wa.me/79963133996">WhatsApp</a>
-      <a class="btn btn-ghost" style="color:var(--accent);border-color:var(--border);" href="https://t.me/JapZabCar">Telegram-канал</a>
-    </p>
   </div>
-</section>
-
-<script>
-// TODO: заменить на реальный Telegram Bot API вызов, когда будет создан бот через @BotFather
-// (нужен BOT_TOKEN и CHAT_ID менеджера). Пока форма просто открывает WhatsApp с готовым текстом заявки —
-// рабочий вариант без бэкенда, ничего не потеряется, просто на шаг больше кликов у клиента.
-function sendLead(e) {
-  e.preventDefault();
-  const name = document.getElementById('name').value;
-  const phone = document.getElementById('phone').value;
-  const message = document.getElementById('message').value;
-  const text = encodeURIComponent(`Заявка с сайта\nИмя: ${name}\nКонтакт: ${phone}\nЗапрос: ${message}`);
-  document.getElementById('leadStatus').textContent = 'Открываем WhatsApp с вашей заявкой...';
-  window.open(`https://wa.me/79963133996?text=${text}`, '_blank');
-  return false;
-}
-</script>
+  <div class="contacts-grid" data-hero="">
+    <form class="contacts-form" data-lead-form>
+      <label class="contacts-field"><span class="calc-field-label">Имя</span><input name="name" required></label>
+      <label class="contacts-field"><span class="calc-field-label">Ваш Telegram или телефон</span><input name="phone" required placeholder="@username"></label>
+      <label class="contacts-field"><span class="calc-field-label">Что ищете</span><textarea name="msg" rows="4" placeholder="Например: Toyota Vezel, до 1,5 млн, для себя"></textarea></label>
+      <button type="submit" class="btn btn-primary btn-block">Отправить в Telegram <span>&#8594;</span></button>
+      <div class="lead-status" data-lead-status></div>
+    </form>
+    <div class="contacts-direct">
+      <div class="contacts-direct-label">Или свяжитесь напрямую</div>
+      <a href="https://t.me/JapZabCar" class="contacts-direct-link"><span><small>Telegram</small><span class="big">@JapZabCar</span></span><span class="arrow">&#8594;</span></a>
+      <a href="tel:+79963133996" class="contacts-direct-link"><span><small>Телефон</small><span class="big">+7 996 313-39-96</span></span><span class="arrow">&#8594;</span></a>
+      <p class="contacts-note">Работаем с клиентами из Читы и всего Забайкальского края. Не знаете, сколько выйдет? <a href="calculator.html">Рассчитайте растаможку</a>.</p>
+    </div>
+  </div>
+</div>
 
 <footer class="site">
   <div class="container">
-    <div>JapZabCar &mdash; авто из Японии, Кореи и Китая под ключ.</div>
-    <div style="margin-top:8px;">Телефон/WhatsApp: <a href="https://wa.me/79963133996">+7 996 313-39-96</a> &middot; Telegram: <a href="https://t.me/JapZabCar">@JapZabCar</a></div>
+    <span>JapZabCar &mdash; авто из Японии, Кореи и Китая под ключ</span>
+    <span class="footer-links"><a href="tel:+79963133996">+7 996 313-39-96</a><a href="https://t.me/JapZabCar">Telegram: @JapZabCar</a></span>
   </div>
 </footer>
 
-<script src="assets/js/header.js" defer></script>
-<script src="assets/js/reveal.js" defer></script>
+<script src="assets/js/anim.js" defer></script>
+<script src="assets/js/lead.js" defer></script>
+<script>document.addEventListener("DOMContentLoaded",function(){JZAnim.hero(document);});</script>
 </body>
 </html>
