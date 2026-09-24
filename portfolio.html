@@ -16,6 +16,20 @@
     <a href="index.html" class="logo"><img src="assets/logo.png" alt="JapZabCar"></a>
     <nav class="main"><a href="index.html">Главная</a><a href="portfolio.html" class="active">Доставленные авто</a><a href="calculator.html">Калькулятор</a><a href="contacts.html">Контакты</a></nav>
     <a href="contacts.html" class="header-cta">Оставить заявку <span>&#8594;</span></a>
+    <button type="button" class="burger" id="burgerBtn" aria-label="Меню" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="burger-lines"><span></span><span></span><span></span></span>
+      <span class="burger-close" aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <nav class="mobile-menu-nav"><a href="index.html" class="mobile-menu-link"><span class="mobile-menu-link-text">Главная</span><span class="mobile-menu-link-arrow">&#8594;</span></a><a href="portfolio.html" class="mobile-menu-link active"><span class="mobile-menu-link-text">Доставленные авто</span></a><a href="calculator.html" class="mobile-menu-link"><span class="mobile-menu-link-text">Калькулятор</span><span class="mobile-menu-link-arrow">&#8594;</span></a><a href="contacts.html" class="mobile-menu-link"><span class="mobile-menu-link-text">Контакты</span><span class="mobile-menu-link-arrow">&#8594;</span></a></nav>
+    <div class="mobile-menu-actions">
+      <a href="contacts.html" class="btn btn-primary mobile-menu-cta">Оставить заявку <span>&#8594;</span></a>
+      <div class="mobile-menu-contacts">
+        <a href="tel:+79963133996">Позвонить</a>
+        <a href="https://t.me/JapZabCar">Telegram</a>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -712,6 +726,7 @@
   </div>
   <div class="lightbox-body">
     <img id="lightboxImg" alt="">
+    <span class="lightbox-photo-badge" id="lightboxPhotoBadge"></span>
     <button type="button" class="lightbox-arrow prev" id="lightboxPrev" aria-label="Предыдущее фото">&#8592;</button>
     <button type="button" class="lightbox-arrow next" id="lightboxNext" aria-label="Следующее фото">&#8594;</button>
   </div>
@@ -733,6 +748,7 @@
 </footer>
 
 <script src="assets/js/anim.js" defer></script>
+<script src="assets/js/menu.js" defer></script>
 <script src="assets/js/portfolio.js" defer></script>
 <script>document.addEventListener("DOMContentLoaded",function(){JZAnim.hero(document);JZAnim.reveal(document);});</script>
 </body>

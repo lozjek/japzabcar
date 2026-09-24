@@ -15,6 +15,20 @@
     <a href="index.html" class="logo"><img src="assets/logo.png" alt="JapZabCar"></a>
     <nav class="main"><a href="index.html">Главная</a><a href="portfolio.html">Доставленные авто</a><a href="calculator.html" class="active">Калькулятор</a><a href="contacts.html">Контакты</a></nav>
     <a href="contacts.html" class="header-cta">Оставить заявку <span>&#8594;</span></a>
+    <button type="button" class="burger" id="burgerBtn" aria-label="Меню" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="burger-lines"><span></span><span></span><span></span></span>
+      <span class="burger-close" aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <nav class="mobile-menu-nav"><a href="index.html" class="mobile-menu-link"><span class="mobile-menu-link-text">Главная</span><span class="mobile-menu-link-arrow">&#8594;</span></a><a href="portfolio.html" class="mobile-menu-link"><span class="mobile-menu-link-text">Доставленные авто</span><span class="mobile-menu-link-arrow">&#8594;</span></a><a href="calculator.html" class="mobile-menu-link active"><span class="mobile-menu-link-text">Калькулятор</span></a><a href="contacts.html" class="mobile-menu-link"><span class="mobile-menu-link-text">Контакты</span><span class="mobile-menu-link-arrow">&#8594;</span></a></nav>
+    <div class="mobile-menu-actions">
+      <a href="contacts.html" class="btn btn-primary mobile-menu-cta">Оставить заявку <span>&#8594;</span></a>
+      <div class="mobile-menu-contacts">
+        <a href="tel:+79963133996">Позвонить</a>
+        <a href="https://t.me/JapZabCar">Telegram</a>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -29,17 +43,17 @@
   <div class="calc-grid" data-hero="">
     <div class="calc-form">
       <div class="calc-field">
-        <div class="calc-field-label">Возраст автомобиля</div>
+        <div class="calc-field-label"><span class="calc-field-num">1 &middot; </span>Возраст автомобиля</div>
         <div class="calc-seg" id="calcAgeSeg">
           <button type="button" data-age="new" class="active">До 3 лет</button>
           <button type="button" data-age="mid">3&ndash;5 лет</button>
           <button type="button" data-age="old">Старше 5 лет</button>
         </div>
       </div>
-      <label class="calc-field"><span class="calc-field-label">Объём двигателя, см&sup3;</span><input type="number" inputmode="decimal" id="calcVolume" placeholder="например, 1998"></label>
-      <label class="calc-field"><span class="calc-field-label">Мощность, л.с.</span><input type="number" inputmode="decimal" id="calcPower" placeholder="например, 150"></label>
-      <label class="calc-field"><span class="calc-field-label">Стоимость авто, &euro;</span><input type="number" inputmode="decimal" id="calcValueEur" placeholder="например, 15000"><span class="calc-field-hint">Оценочная таможенная стоимость</span></label>
-      <label class="calc-field"><span class="calc-field-label">Курс ЦБ РФ, &#8381; за 1 &euro;</span><input type="number" inputmode="decimal" id="calcRate" placeholder="загружаем&hellip;"><span class="calc-field-hint" id="calcRateStatus">Загружаем курс ЦБ РФ&hellip;</span></label>
+      <label class="calc-field"><span class="calc-field-label"><span class="calc-field-num">2 &middot; </span>Объём двигателя, см&sup3;</span><input type="number" inputmode="decimal" id="calcVolume" placeholder="например, 1998"></label>
+      <label class="calc-field"><span class="calc-field-label"><span class="calc-field-num">3 &middot; </span>Мощность, л.с.</span><input type="number" inputmode="decimal" id="calcPower" placeholder="например, 150"></label>
+      <label class="calc-field"><span class="calc-field-label"><span class="calc-field-num">4 &middot; </span>Стоимость авто, &euro;</span><input type="number" inputmode="decimal" id="calcValueEur" placeholder="например, 15000"><span class="calc-field-hint">Оценочная таможенная стоимость</span></label>
+      <label class="calc-field"><span class="calc-field-label"><span class="calc-field-num">5 &middot; </span>Курс ЦБ РФ, &#8381; за 1 &euro;</span><input type="number" inputmode="decimal" id="calcRate" placeholder="загружаем&hellip;"><span class="calc-field-hint" id="calcRateStatus">Загружаем курс ЦБ РФ&hellip;</span></label>
     </div>
     <div class="calc-result">
       <div class="calc-result-label">Расчёт</div>
@@ -67,6 +81,7 @@
 </footer>
 
 <script src="assets/js/anim.js" defer></script>
+<script src="assets/js/menu.js" defer></script>
 <script src="assets/js/calculator.js" defer></script>
 <script>document.addEventListener("DOMContentLoaded",function(){JZAnim.hero(document);});</script>
 </body>

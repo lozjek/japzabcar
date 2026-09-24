@@ -78,6 +78,19 @@ nav.main a.active { border-color: var(--color-accent); }
 }
 .header-cta:hover { background: var(--color-accent-600); color: #f3f2f2; text-decoration: none; gap: 14px; }
 
+/* ── Mobile burger + dropdown menu (hidden above the mobile breakpoint) ── */
+.burger {
+  display: none; flex: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 44px; height: 44px; padding: 0 10px; border: 0; background: transparent; cursor: pointer;
+}
+.burger-lines span { display: block; height: 2px; background: #f3f2f2; }
+.burger-close { display: none; font: 800 22px var(--font-heading); color: #f3f2f2; }
+.burger.is-open { background: var(--color-accent); }
+.burger.is-open .burger-lines { display: none; }
+.burger.is-open .burger-close { display: block; }
+.mobile-menu { display: none; }
+.mobile-menu[hidden] { display: none; }
+
 /* ── Buttons ──────────────────────────────────────────────────────────── */
 .btn {
   display: inline-flex; justify-content: space-between; align-items: center; gap: 24px;
@@ -146,6 +159,7 @@ nav.main a.active { border-color: var(--color-accent); }
 .step:last-child { border-right: 0; }
 .step:hover { background: #201e1d; color: #f3f2f2; }
 .step-num { font-size: 13px; font-weight: 600; color: var(--color-accent); letter-spacing: 0.08em; }
+.step-body { display: flex; flex-direction: column; gap: 10px; }
 .step-title { font-size: 20px; font-weight: 800; }
 .step-text { font-size: 14px; line-height: 1.5; opacity: .8; }
 
@@ -374,9 +388,127 @@ footer.site a { color: #f3f2f2; }
 .contacts-direct-link .arrow { font-size: 32px; font-weight: 800; }
 .contacts-note { font-size: 15px; color: var(--color-neutral-800); margin: 24px 0 0; max-width: 420px; }
 
-/* ── Responsive ───────────────────────────────────────────────────────── */
-@media (max-width: 640px) {
-  .lightbox-body { padding: 0 8px; }
-  .lightbox-arrow { width: 40px; height: 40px; font-size: 16px; }
+.calc-field-num { display: none; }
+.contacts-form-heading { display: none; }
+.lightbox-photo-badge { display: none; }
+
+/* ── Responsive (≤768px, per design_handoff_japzabcar_redesign/design/mobile.dc.html) ── */
+@media (max-width: 768px) {
+  /* header: burger replaces inline nav, height capped at 60px */
+  header.site .container { height: 60px; padding-top: 0; padding-bottom: 0; }
+  header.site .logo img { height: 38px; }
+  nav.main, .header-cta { display: none; }
+  .burger { display: flex; }
+  .mobile-menu {
+    display: block; position: fixed; left: 0; right: 0; top: 60px; bottom: 0;
+    background: #201e1d; z-index: 49; overflow-y: auto;
+  }
+  .mobile-menu[hidden] { display: none; }
+  .mobile-menu-nav { display: flex; flex-direction: column; padding: 0 16px; }
+  .mobile-menu-link {
+    display: flex; justify-content: space-between; align-items: center; min-height: 60px;
+    border-bottom: 2px solid #444141; color: #f3f2f2; font-size: 22px; font-weight: 800;
+  }
+  .mobile-menu-link:hover { color: #f3f2f2; text-decoration: none; }
+  .mobile-menu-link.active .mobile-menu-link-text { border-bottom: 2px solid var(--color-accent); }
+  .mobile-menu-link-arrow { color: var(--color-neutral-600); }
+  .mobile-menu-actions { display: flex; flex-direction: column; gap: 10px; padding: 20px 16px 24px; }
+  .mobile-menu-cta { height: 54px; }
+  .mobile-menu-contacts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .mobile-menu-contacts a {
+    display: flex; align-items: center; justify-content: center; height: 48px;
+    border: 2px solid var(--color-neutral-600); color: #f3f2f2; font-weight: 600; font-size: 15px;
+  }
+  .mobile-menu-contacts a:hover { color: #f3f2f2; text-decoration: none; }
+
+  /* hero: photo above text, ~260px, full-width stacked buttons */
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-photo { order: -1; min-height: 260px; }
+  .hero-left { border-right: 0; padding: 28px 16px 24px; gap: 16px; }
+  .hero-left h1 { font-size: 36px; }
+  .hero-left .cta-row { flex-direction: column; }
+  .hero-left .cta-row .btn, .hero-left .btn-primary { width: 100%; min-width: 0; }
+
+  /* steps: single column, number beside text, horizontal dividers */
+  .steps-grid { grid-template-columns: 1fr; }
+  .step {
+    display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 4px 8px;
+    padding: 14px 0; border-right: 0; border-bottom: 2px solid var(--color-divider);
+  }
+  .step:last-child { border-bottom: 0; }
+  .step:hover { background: transparent; color: inherit; }
+  .step-num { padding-top: 4px; }
+  .step-body { display: flex; flex-direction: column; gap: 2px; }
+  .step-title { font-size: 18px; }
+
+  /* tariffs: compact row — kicker line, then name+price sharing a line */
+  .tariff { display: flex; flex-direction: row; flex-wrap: wrap; align-items: baseline; padding: 20px; gap: 4px 12px; }
+  .tariff-kicker { order: 1; flex: 0 0 100%; }
+  .tariff-name { order: 2; flex: 1 1 auto; font-size: 21px; }
+  .tariff-price { order: 3; flex: 0 0 auto; font-size: 22px; border-top: 0; padding-top: 0; white-space: nowrap; }
+  .tariff-text { order: 4; flex: 0 0 100%; font-size: 13px; opacity: .85; }
+
+  /* home carousel: stacked, shorter photo */
+  .carousel-slide.active { grid-template-columns: 1fr; }
+  .slide-photo { height: 260px; }
+  .slide-info { padding: 18px 16px; }
+  .slide-name { font-size: 24px; }
+  .slide-price { font-size: 32px; }
+  .slide-nav button { height: 52px; }
+
+  /* brand filter: one scrollable row */
+  .brand-filter { flex-wrap: nowrap; overflow-x: auto; width: auto; max-width: 100%; scrollbar-width: none; }
+  .brand-filter::-webkit-scrollbar { display: none; }
+  .brand-btn { flex: 0 0 auto; white-space: nowrap; height: 44px; }
+
+  /* portfolio cards: horizontal, photo left */
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .portfolio-card { display: grid; grid-template-columns: 136px minmax(0, 1fr); }
+  .portfolio-photo-btn { height: 118px; }
+  .portfolio-card-body { padding: 10px 12px; gap: 2px; }
+  .portfolio-card-name { font-size: 16px; }
+  .portfolio-card-specs { font-size: 12px; }
+  .portfolio-card-client { display: none; }
+  .portfolio-card-price { font-size: 18px; border-top: 0; padding-top: 0; }
+
+  /* lightbox: full-bleed photo, swipe instead of arrows, stacked footer */
+  .lightbox-body { padding: 0; }
+  .lightbox-arrow { display: none; }
+  .lightbox-photo-badge {
+    display: block; position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%);
+    background: rgba(32, 30, 29, 0.8); color: #f3f2f2; font-size: 13px; font-weight: 600; padding: 6px 12px;
+  }
+  .lightbox-foot { flex-direction: column; align-items: stretch; gap: 0; padding: 0; }
+  .lightbox-thumbs { padding: 12px 16px; }
+  .lightbox-carnav { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 2px solid #444141; }
+  .lightbox-carnav-label { display: none; }
+  .lightbox-carnav button { height: 56px; text-align: left; border: 0; }
+  .lightbox-carnav button:first-of-type { border-right: 2px solid #444141; }
+
+  .reviews-showmore { min-height: 44px; }
+
+  /* calculator: single column, numbered fields, result below, not sticky */
+  .calc-grid { grid-template-columns: 1fr; }
+  .calc-form { border-right: 0; padding: 24px 16px 28px; gap: 18px; }
+  .calc-field-num { display: inline; }
+  .calc-seg button { font-size: 13px; padding: 10px 8px; }
+  .calc-result { padding: 24px 16px 28px; }
+  .calc-total-value { font-size: 38px; }
+
+  /* contacts: direct links first, form (with its own heading) below */
+  .contacts-grid { grid-template-columns: 1fr; }
+  .contacts-direct { order: -1; padding: 12px 16px 0; }
+  .contacts-direct-label { display: none; }
+  .contacts-direct-label + .contacts-direct-link { margin-top: 0; border-top: 2px solid #201e1d; }
+  .contacts-direct-link { min-height: 76px; }
+  .contacts-direct-link .big { font-size: 26px; }
   .contacts-direct-link .arrow { display: none; }
+  .contacts-form { border-right: 0; padding: 28px 16px 32px; }
+  .contacts-form-heading { display: block; font-size: 20px; font-weight: 800; margin-bottom: -6px; }
+
+  /* footer: direct-contact rows first, full-width, 1px dividers */
+  footer.site .container { flex-direction: column; align-items: stretch; gap: 0; padding: 8px 16px 20px; }
+  .footer-links { order: -1; flex-direction: column; gap: 0; }
+  .footer-links a { display: flex; align-items: center; min-height: 48px; border-bottom: 1px solid #444141; font-size: 16px; font-weight: 600; }
+  footer.site .container > span:not(.footer-links) { padding-top: 14px; font-size: 13px; }
 }

@@ -15,6 +15,20 @@
     <a href="index.html" class="logo"><img src="assets/logo.png" alt="JapZabCar"></a>
     <nav class="main"><a href="index.html">Главная</a><a href="portfolio.html">Доставленные авто</a><a href="calculator.html">Калькулятор</a><a href="contacts.html" class="active">Контакты</a></nav>
     
+    <button type="button" class="burger" id="burgerBtn" aria-label="Меню" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="burger-lines"><span></span><span></span><span></span></span>
+      <span class="burger-close" aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <nav class="mobile-menu-nav"><a href="index.html" class="mobile-menu-link"><span class="mobile-menu-link-text">Главная</span><span class="mobile-menu-link-arrow">&#8594;</span></a><a href="portfolio.html" class="mobile-menu-link"><span class="mobile-menu-link-text">Доставленные авто</span><span class="mobile-menu-link-arrow">&#8594;</span></a><a href="calculator.html" class="mobile-menu-link"><span class="mobile-menu-link-text">Калькулятор</span><span class="mobile-menu-link-arrow">&#8594;</span></a><a href="contacts.html" class="mobile-menu-link active"><span class="mobile-menu-link-text">Контакты</span></a></nav>
+    <div class="mobile-menu-actions">
+      
+      <div class="mobile-menu-contacts">
+        <a href="tel:+79963133996">Позвонить</a>
+        <a href="https://t.me/JapZabCar">Telegram</a>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -28,6 +42,7 @@
   </div>
   <div class="contacts-grid" data-hero="">
     <form class="contacts-form" data-lead-form>
+      <div class="contacts-form-heading">Или оставьте заявку</div>
       <label class="contacts-field"><span class="calc-field-label">Имя</span><input name="name" required></label>
       <label class="contacts-field"><span class="calc-field-label">Ваш Telegram или телефон</span><input name="phone" required placeholder="@username"></label>
       <label class="contacts-field"><span class="calc-field-label">Что ищете</span><textarea name="msg" rows="4" placeholder="Например: Toyota Vezel, до 1,5 млн, для себя"></textarea></label>
@@ -51,6 +66,7 @@
 </footer>
 
 <script src="assets/js/anim.js" defer></script>
+<script src="assets/js/menu.js" defer></script>
 <script src="assets/js/lead.js" defer></script>
 <script>document.addEventListener("DOMContentLoaded",function(){JZAnim.hero(document);});</script>
 </body>

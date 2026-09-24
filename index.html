@@ -16,6 +16,20 @@
     <a href="index.html" class="logo"><img src="assets/logo.png" alt="JapZabCar"></a>
     <nav class="main"><a href="index.html" class="active">Главная</a><a href="portfolio.html">Доставленные авто</a><a href="calculator.html">Калькулятор</a><a href="contacts.html">Контакты</a></nav>
     <a href="#lead" class="header-cta">Оставить заявку <span>&#8594;</span></a>
+    <button type="button" class="burger" id="burgerBtn" aria-label="Меню" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="burger-lines"><span></span><span></span><span></span></span>
+      <span class="burger-close" aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <nav class="mobile-menu-nav"><a href="index.html" class="mobile-menu-link active"><span class="mobile-menu-link-text">Главная</span></a><a href="portfolio.html" class="mobile-menu-link"><span class="mobile-menu-link-text">Доставленные авто</span><span class="mobile-menu-link-arrow">&#8594;</span></a><a href="calculator.html" class="mobile-menu-link"><span class="mobile-menu-link-text">Калькулятор</span><span class="mobile-menu-link-arrow">&#8594;</span></a><a href="contacts.html" class="mobile-menu-link"><span class="mobile-menu-link-text">Контакты</span><span class="mobile-menu-link-arrow">&#8594;</span></a></nav>
+    <div class="mobile-menu-actions">
+      <a href="#lead" class="btn btn-primary mobile-menu-cta">Оставить заявку <span>&#8594;</span></a>
+      <div class="mobile-menu-contacts">
+        <a href="tel:+79963133996">Позвонить</a>
+        <a href="https://t.me/JapZabCar">Telegram</a>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -47,7 +61,7 @@
       <p>От заявки до передачи ключей — под нашим контролем на каждом шаге.</p>
     </div>
     <div class="steps-grid" data-stagger="">
-      <div class="step"><div class="step-num">01</div><div class="step-title">Подбор</div><div class="step-text">Находим вариант на аукционах Японии, Кореи или Китая под ваш бюджет и запрос.</div></div><div class="step"><div class="step-num">02</div><div class="step-title">Выкуп</div><div class="step-text">Участвуем в торгах и выкупаем авто по согласованной максимальной ставке.</div></div><div class="step"><div class="step-num">03</div><div class="step-title">Доставка</div><div class="step-text">Отправляем авто до порта, оформляем документы для ввоза.</div></div><div class="step"><div class="step-num">04</div><div class="step-title">Растаможка</div><div class="step-text">Проходим таможенное оформление — прозрачно, без скрытых платежей.</div></div><div class="step"><div class="step-num">05</div><div class="step-title">Выдача</div><div class="step-text">Передаём автомобиль в вашем городе с полным пакетом документов.</div></div>
+      <div class="step"><div class="step-num">01</div><div class="step-body"><div class="step-title">Подбор</div><div class="step-text">Находим вариант на аукционах Японии, Кореи или Китая под ваш бюджет и запрос.</div></div></div><div class="step"><div class="step-num">02</div><div class="step-body"><div class="step-title">Выкуп</div><div class="step-text">Участвуем в торгах и выкупаем авто по согласованной максимальной ставке.</div></div></div><div class="step"><div class="step-num">03</div><div class="step-body"><div class="step-title">Доставка</div><div class="step-text">Отправляем авто до порта, оформляем документы для ввоза.</div></div></div><div class="step"><div class="step-num">04</div><div class="step-body"><div class="step-title">Растаможка</div><div class="step-text">Проходим таможенное оформление — прозрачно, без скрытых платежей.</div></div></div><div class="step"><div class="step-num">05</div><div class="step-body"><div class="step-title">Выдача</div><div class="step-text">Передаём автомобиль в вашем городе с полным пакетом документов.</div></div></div>
     </div>
   </div>
 
@@ -832,6 +846,7 @@
 </footer>
 
 <script src="assets/js/anim.js" defer></script>
+<script src="assets/js/menu.js" defer></script>
 <script src="assets/js/home-carousel.js" defer></script>
 <script src="assets/js/lead.js" defer></script>
 <script>document.addEventListener("DOMContentLoaded",function(){JZAnim.hero(document);JZAnim.reveal(document);JZAnim.count(document.getElementById("heroCount"));});</script>

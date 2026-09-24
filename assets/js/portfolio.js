@@ -35,6 +35,8 @@
   var lbMeta = document.getElementById('lightboxMeta');
   var lbThumbs = document.getElementById('lightboxThumbs');
   var lbCarLabel = document.getElementById('lightboxCarLabel');
+  var lbPhotoBadge = document.getElementById('lightboxPhotoBadge');
+  var lbBody = document.querySelector('.lightbox-body');
   var lbIndex = -1, gIndex = 0;
 
   function openLightbox(i) {
@@ -60,6 +62,7 @@
     lbName.textContent = card.getAttribute('data-name');
     lbMeta.textContent = card.getAttribute('data-specs') + ' · ' + card.getAttribute('data-price');
     lbCarLabel.textContent = 'Фото ' + (gIndex + 1) + '/' + g.length + ' · Авто ' + (lbIndex + 1) + '/' + visibleCards().length;
+    if (lbPhotoBadge) lbPhotoBadge.textContent = (gIndex + 1) + ' / ' + g.length;
     lbThumbs.innerHTML = '';
     if (g.length > 1) {
       g.forEach(function (src, k) {
@@ -89,6 +92,19 @@
     lbIndex = (lbIndex + dir + list.length) % list.length;
     gIndex = toEnd ? gallery(list[lbIndex]).length - 1 : 0;
     renderLightbox();
+  }
+
+  if (lbBody) {
+    var swipeStartX = null, swipeStartY = null;
+    lbBody.addEventListener('touchstart', function (e) {
+      var t = e.changedTouches[0]; swipeStartX = t.clientX; swipeStartY = t.clientY;
+    }, { passive: true });
+    lbBody.addEventListener('touchend', function (e) {
+      if (swipeStartX === null) return;
+      var t = e.changedTouches[0], dx = t.clientX - swipeStartX, dy = t.clientY - swipeStartY;
+      swipeStartX = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { if (dx < 0) gNext(); else gPrev(); }
+    }, { passive: true });
   }
 
   grid.addEventListener('click', function (e) {
