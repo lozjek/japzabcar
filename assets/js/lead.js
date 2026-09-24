@@ -1,10 +1,13 @@
 /* Shared lead-form submit handler. Ported from design/jz-data.js JZSendLead.
    Auto-wires any <form data-lead-form> with a [data-lead-status] element inside it. */
 (function () {
-  // No bot/webhook yet — form copies the request text and opens Telegram.
-  // When a bot exists: set this to its endpoint URL, it will receive a
-  // POST of {name, contact, message, text}.
+  // No bot/webhook yet — form opens a direct chat with the manager on
+  // Telegram, with the request text pre-filled via the `text` deep-link
+  // param (t.me/JapZabCar is a channel and can't receive DMs, so this has
+  // to point at a real person/bot). When a bot exists: set JZ_LEAD_ENDPOINT
+  // to its URL, it will receive a POST of {name, contact, message, text}.
   window.JZ_LEAD_ENDPOINT = '';
+  var LEAD_TELEGRAM_USERNAME = 'AlexeyGolobokov';
 
   window.JZSendLead = function (lead) {
     var text = 'Заявка с сайта\nИмя: ' + lead.name + '\nКонтакт: ' + lead.contact + '\nЗапрос: ' + (lead.message || '');
@@ -18,8 +21,8 @@
       });
     }
     try { navigator.clipboard && navigator.clipboard.writeText(text); } catch (e) {}
-    window.open('https://t.me/JapZabCar', '_blank');
-    return Promise.resolve('Текст заявки скопирован — вставьте его в чат Telegram.');
+    window.open('https://t.me/' + LEAD_TELEGRAM_USERNAME + '?text=' + encodeURIComponent(text), '_blank');
+    return Promise.resolve('Открылся чат с менеджером — сообщение уже готово, останется нажать «Отправить».');
   };
 
   document.querySelectorAll('form[data-lead-form]').forEach(function (form) {
