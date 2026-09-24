@@ -1,12 +1,11 @@
 /* Shared lead-form submit handler. Ported from design/jz-data.js JZSendLead.
    Auto-wires any <form data-lead-form> with a [data-lead-status] element inside it. */
 (function () {
-  // No bot/webhook yet — form opens a direct chat with the manager on
-  // Telegram, with the request text pre-filled via the `text` deep-link
-  // param (t.me/JapZabCar is a channel and can't receive DMs, so this has
-  // to point at a real person/bot). When a bot exists: set JZ_LEAD_ENDPOINT
-  // to its URL, it will receive a POST of {name, contact, message, text}.
-  window.JZ_LEAD_ENDPOINT = '';
+  // Cloudflare Worker relays the request to the manager's Telegram via
+  // Bot API (bot token lives server-side as a Worker secret, never here).
+  // If the endpoint is ever unreachable, fall back to opening a pre-filled
+  // DM so the lead isn't lost.
+  window.JZ_LEAD_ENDPOINT = 'https://japzabcar-leads.lozjek.workers.dev';
   var LEAD_TELEGRAM_USERNAME = 'AlexeyGolobokov';
 
   window.JZSendLead = function (lead) {
@@ -17,7 +16,11 @@
         body: JSON.stringify({ name: lead.name, contact: lead.contact, message: lead.message, text: text })
       }).then(function (r) {
         if (!r.ok) throw new Error(String(r.status));
-        return 'Заявка отправлена — скоро напишем вам.';
+        return 'Спасибо за обращение — мы скоро с вами свяжемся.';
+      }).catch(function () {
+        try { navigator.clipboard && navigator.clipboard.writeText(text); } catch (e) {}
+        window.open('https://t.me/' + LEAD_TELEGRAM_USERNAME + '?text=' + encodeURIComponent(text), '_blank');
+        return 'Не удалось отправить автоматически — открылся чат с менеджером, отправьте сообщение вручную.';
       });
     }
     try { navigator.clipboard && navigator.clipboard.writeText(text); } catch (e) {}
